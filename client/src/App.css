@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400&display=swap');
+
+a{
+  color:black !important;
+}
+
+.brand-logo, h2{
+  font-family: 'Grand Hotel', cursive;
+}
+
+.card{
+    margin: 30px auto;
+    max-width: 410px;
+    /* text-align: center; */
+    padding: 15px;
+}
+
+.btn{
+  margin : 17px 0;
+}
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid rgb(24, 73, 236) !important;
+    box-shadow: 0 1px 0 0 rgb(24, 73, 236) !important;
+}
+.input-field input[type=password]:focus {
+    border-bottom: 1px solid rgb(24, 73, 236) !important;
+    box-shadow: 0 1px 0 0 rgb(24, 73, 236) !important;
+}
+
+.heart-icon{
+  color: red;
+  display: inline;
+}
+
+.post-image{
+  max-height: 400px;
+}
+
+.password-validation{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
+    text-align: left;
+    margin: 0;
+    line-height: 0;
+    border: 1px solid black;
+    padding: 3px;
+}
+
+.placeicon{
+  font-family: fontawesome;
+}
+
+/* https://fontawesome.com/cheatsheet?from=io */
+
+.form-heading{
+  margin: 17px auto;
+}
+.btn{
+      margin: 10px auto 2px;
+}
+.logout{
+  margin: 0 40px 0 0;
+}
+
+/* *************************** */
+/* Profile Page Styling Starts */
+
+.profile{
+  max-width: 65%;
+  margin: 0 auto;
+}
+.profile-top-container{
+  display: flex;
+  justify-content: space-around;
+  margin: 18px 0;
+  border-bottom: 1px solid grey;
+}
+.profile-image{
+  width: 160px;
+  height: 160px;
+  border-radius:80px;
+}
+.profile-data{
+  display: flex;
+  justify-content: space-around;
+  width: 108%;
+}
+.gallery{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.item{
+  height: 225px;
+  width: 30%;
+}
+
+/* Profile Page Styling Ends */
+/* *************************** */
+
+/*Home Page Styling starts*/
+/* .like-dislike{
+    border: 2px solid black;
+    padding: 2px;
+    width: 107%;
+} */
+
+.comment-name{
+  font-weight: 500;
+}
+
+.deletePostIcon{
+  float: right;
+}
+
+.material-icons:hover{
+  cursor: pointer;
+}
