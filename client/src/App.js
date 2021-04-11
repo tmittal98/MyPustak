@@ -59,10 +59,10 @@ const Routing = () => {
       <Route path="/myfollowingposts">
         <SubscribesUserProfile />
       </Route>
-      <Route exact path="/reset-password">
+      <Route exact path="/reset">
         <Reset />
       </Route>
-      <Route exact path="/reset-password/:token">
+      <Route path="/reset/:token">
         <NewPassword />
       </Route>
     </Switch >

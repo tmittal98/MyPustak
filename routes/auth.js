@@ -155,7 +155,7 @@ router.post('/reset-password', (req, res) => {
                         from: "tusharmittal065@gmail.com",
                         subject: "password-reset",
                         html: `<p>You requested for password reset</p>
-                                <h4>Click on this <a href="${EMAIL}/reset-password/${token}">link</a> to reset your password</h5>`
+                                <h4>Click on this <a href="${EMAIL}/reset/${token}">link</a> to reset your password</h5>`
                     })
 
                     res.status(200).json({ message: "Check your email" });

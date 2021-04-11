@@ -229,3 +229,9 @@ button{
 .shift-right{
   margin-left: 206px;
 }
+
+i.fas.fa-eye.eye-icon::before{
+    position: relative !important;
+    top: -37px !important;
+    right: -119px !important;
+}
