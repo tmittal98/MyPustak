@@ -66,7 +66,9 @@ const Profile = () => {
     return (
         <>
             <div className="profile">
+
                 <div className="profile-top-container">
+
                     <div className="left-top-container">
                         <div>
                             <img className="profile-image"
@@ -95,16 +97,17 @@ const Profile = () => {
                             <h6 className="bio-info"><strong>{state ? state.following.length : "0"} </strong>following</h6>
                         </div>
                     </div>
+
                 </div>
-            </div>
-            <div className="gallery">
-                {
-                    mypics.map(item => {
-                        return (
-                            <img className="item" src={item.photo} alt={item.title} key={item._id} />
-                        )
-                    })
-                }
+                <div className="gallery">
+                    {
+                        mypics.map(item => {
+                            return (
+                                <img className="item" src={item.photo} alt={item.title} key={item._id} />
+                            )
+                        })
+                    }
+                </div>
             </div>
         </>
     )
