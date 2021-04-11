@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patua+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 
 a{
-  color:black !important;
+  color:black;
 }
 
 .brand-logo, h2{
@@ -11,9 +13,10 @@ a{
 
 .card{
     margin: 30px auto;
-    max-width: 410px;
-    /* text-align: center; */
-    padding: 15px;
+    max-width: 418px;
+    max-height: 743px;
+    padding: 1px;
+    
 }
 
 .btn{
@@ -42,13 +45,14 @@ a{
     font-size: 13px;
     text-align: left;
     margin: 0;
+    margin-bottom: 10px;
     line-height: 0;
     border: 1px solid black;
     padding: 3px;
 }
 
 .placeicon{
-  font-family: fontawesome;
+  /* font-family: fontawesome !important; */
 }
 
 /* https://fontawesome.com/cheatsheet?from=io */
@@ -69,6 +73,8 @@ a{
 .profile{
   max-width: 65%;
   margin: 0 auto;
+  font-family: 'Montserrat', sans-serif;
+
 }
 .profile-top-container{
   display: flex;
@@ -90,10 +96,12 @@ a{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  margin: 0 9%;
 }
 .item{
   height: 225px;
   width: 30%;
+  margin: 10px;
 }
 
 /* Profile Page Styling Ends */
@@ -116,4 +124,103 @@ a{
 
 .material-icons:hover{
   cursor: pointer;
+}
+
+.collection-item{
+  width: 100%;
+}
+
+.logo-navbar{
+    width: 139px;
+    height: 50px;
+    margin: 4px;
+    margin-left: 48px;
+}
+
+.logo-signin{
+  width: 85%;
+  height: 100%;
+  margin: auto;
+  margin-bottom: 32px;
+}
+.signin-card{
+  padding: 64px;
+  padding: 20px;
+  box-shadow:
+  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+  0 12.5px 10px rgba(0, 0, 0, 0.06),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+  0 100px 80px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  
+}
+/* .show{
+  display: ;
+}
+
+.hide{
+  display: none;
+} */
+
+.fa-eye{
+    position: relative;
+    top: -34px;
+    right: -175px;
+}
+
+input[type="text"]{
+  font-family: 'Montserrat', sans-serif;
+}
+input[type="email"]{
+  font-family: 'Montserrat', sans-serif;
+}
+input[type="password"]{
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 0;
+}
+.navbar-ele{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  margin-right: 18px;
+}
+.input-field{
+  /* margin-top:0 !important; */
+}
+
+.password-field{
+  margin-bottom: 3px;
+}
+.reset-password{
+  margin: 30px;
+}
+
+button{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.right{
+  margin-right: 50px;
+}
+.home-card{
+  font-family: 'Montserrat', sans-serif;
+  padding: 5px 10px;
+}
+
+.home-card:hover {
+  box-shadow: 3px 8px 39px 5px rgba(0,0,0,.1);
+}
+
+.create-post{
+    margin: 7% auto;
+    padding: 4%;
+    text-align: center;
+    border-radius: 17px;
+}
+
+.right-bio-container{
+  position:relative;
+  right:212px;
 }

@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useContext, useEffect, useState } from 'react'
@@ -8,6 +9,19 @@ const Home = () => {
     //this data is to fetch all posts and store in data
     const [data, setData] = useState([]);
     const { state, dispatch } = useContext(UserContext);
+
+    useEffect(() => {
+        fetch("/allposts", {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("jwt")
+            }
+        })
+            .then(res => res.json())
+            .then(result => {
+                // console.log("All posts are fetched ", result);
+                setData(result.posts);
+            })
+    }, []);
 
     const likePost = (id) => {
         fetch('/like', {
@@ -26,7 +40,7 @@ const Home = () => {
                 // console.log("ye naya result hain", result);
                 // A re-render can only be triggered if a component's state has changed
                 const newData = data.map(item => {
-                    if (item._id === result._id) {
+                    if (item._id == result._id) {
                         return result;
                     }
                     else {
@@ -35,7 +49,7 @@ const Home = () => {
                 })
                 setData(newData);
             })
-            .catch(err => console.log(err));
+            .catch(err => { console.log(err) });
     }
     const unlikePost = (id) => {
         fetch('/unlike', {
@@ -53,7 +67,7 @@ const Home = () => {
                 // console.log("ye naya result hain", result);
                 // A re-render can only be triggered if a component's state has changed
                 const newData = data.map(item => {
-                    if (item._id === result._id) {
+                    if (item._id == result._id) {
                         return result;
                     }
                     else {
@@ -62,7 +76,7 @@ const Home = () => {
                 })
                 setData(newData);
             })
-            .catch(err => console.log(err));
+            .catch(err => { console.log(err) });
     }
     const makeComment = (text, postId) => {
         fetch('/comment', {
@@ -112,34 +126,23 @@ const Home = () => {
             });
     }
 
-    useEffect(() => {
-        fetch("./allposts", {
-            headers: {
-                "Authorization": "Bearer " + localStorage.getItem("jwt")
-            }
-        })
-            .then(res => res.json())
-            .then(result => {
-                // console.log(result);
-                setData(result.posts);
-            })
-    }, []);
-
     return (
         <div className="home">
             {
                 data.map(item => {
                     return (
                         <div className="card home-card" key={item._id}>
-                            <h5>
-                                <Link to={item.postedBy._id !== state._id ? "/profile/" + item.postedBy._id : "/profile"}>{item.postedBy.name}</Link>
+
+                            <h5 >
+                                <Link className="post-user-name" to={item.postedBy._id !== state._id ? "/profile/" + item.postedBy._id : "/profile"}>{item.postedBy.name}</Link>
                                 {
                                     item.postedBy._id === state._id &&
                                     <i className="material-icons deletePostIcon"
                                         onClick={() => deletePost(item._id)}>
                                         delete
                                     </i>
-                                }</h5>
+                                }
+                            </h5>
                             <div className="card-image">
                                 <img className="post-image" src={item.photo} />
                             </div>
@@ -155,6 +158,7 @@ const Home = () => {
                                 </div>
                                 <h6>{item.title}</h6>
                                 <p>{item.body}</p>
+                                <p className="#fafafa grey lighten-5">{item.comments.length} comments</p>
                                 {
                                     item.comments.map(record => {
                                         return (

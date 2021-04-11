@@ -7,10 +7,19 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { JWT_SECRET } = require('../config/keys')
 const requireLogin = require('../middleware/requireLogin')
+const nodemailer = require('nodemailer')
+const sendgridTransport = require('nodemailer-sendgrid-transport')
+const { SENDGRID_API_KEY, EMAIL } = require('../config/keys');
+const sgMail = require('@sendgrid/mail')
+const crypto = require('crypto')
+const { SENDGRID_API_KEY } = require('../config/keys')
+// sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
-router.get('/protected', requireLogin, (req, res) => {
-    res.send('Hello keep secret ')
-})
+const transporter = nodemailer.createTransport(sendgridTransport({
+    auth: {
+        api_key: SENDGRID_API_KEY
+    }
+}))
 
 router.post('/signup', (req, res) => {
     //es6 destructuring
@@ -42,12 +51,39 @@ router.post('/signup', (req, res) => {
                     });
                     user.save()
                         .then(user => {
+                            // const msg = {
+                            //     to: user.email, // Change to your recipient
+                            //     from: 'tusharmittal065@gmail.com', // Change to your verified sender
+                            //     subject: 'Signup success',
+                            //     text: 'Welcome to instagram',
+                            //     html: require('../services/emailTemplate')({
+                            //         emailFrom: 'tusharmittal065@gmail.com'
+                            //     }),
+                            // }
+                            // sgMail.send(msg)
+                            //     .then(() => {
+                            //         console.log('Email sent')
+                            //     })
+                            //     .catch((error) => {
+                            //         console.error(error)
+                            //     })
+
+                            transporter.sendMail({
+                                to: user.email,
+                                from: "tusharmittal065@gmail.com",
+                                subject: "Welcome to Socially",
+                                html: require('../emailTemplates/welcomeTemplate')({
+                                    name: user.name
+                                })
+                            });
+
                             res.json({ message: "saved successfully" })
                         })
                         .catch(err => {
                             console.log(err);
                         })
                 })
+
 
         })
         .catch(err => {
@@ -98,4 +134,69 @@ router.post('/signin', (req, res) => {
         })
 })
 
+router.post('/reset-password', (req, res) => {
+
+    crypto.randomBytes(32, (err, buffer) => {
+        if (err) {
+            console.log(err);
+        }
+        const token = buffer.toString("hex");
+
+        User.findOne({ email: req.body.email })
+            .then(user => {
+                if (!user) {
+                    return res.status(422).json({ error: "User does not exists with this email" });
+                }
+
+                user.resetToken = token;
+                user.expireToken = Date.now() + 3600000;
+
+                user.save().then((result) => {
+
+                    transporter.sendMail({
+                        to: user.email,
+                        from: "tusharmittal065@gmail.com",
+                        subject: "password-reset",
+                        html: `<p>You requested for password reset</p>
+<h4>click on this <a href="${EMAIL}/reset-password/${token}">link</a> to reset your password</h5>
+`
+                    })
+
+                    res.status(200).json({ message: "Check your email" });
+                })
+            })
+    })
+})
+
+router.post('/new-password', (req, res) => {
+
+    const newPassword = req.body.password;
+    const sentToken = req.body.token;
+
+    User.findOne({ resetToken: sentToken, expireToken: { $gt: Date.now() } })
+        .then(user => {
+            if (!user) {
+                return res.status(422).json({ error: "Try again session expired" });
+            }
+
+            bcrypt.hash(newPassword, 12).then(hashedpassword => {
+
+                user.password = hashedpassword;
+                user.resetToken = undefined;
+                user.expireToken = undefined;
+
+                user.save().then((savedUser) => {
+                    res.json({ message: "password updated successfully" });
+                }).catch(err => {
+                    return res.status(422).json({ error: err });
+                })
+            }).catch(err => {
+                return res.status(422).json({ error: err });
+            });
+        }).catch(err => {
+            return res.status(422).json({ error: err });
+        });
+})
 module.exports = router
+
+

@@ -11,19 +11,7 @@ router.get('/allposts', requireLogin, (req, res) => {
     Post.find()
         .populate("postedBy", "_id name email")//to expand the object id so that we can get details
         .populate("comments.postedBy", "_id name")
-        .then(posts => {
-            res.json({ posts })//we can condense it down to post 
-        })
-        .catch(err => {
-            console.log(err);
-        })
-})
-
-router.get('/getsubpost', requireLogin, (req, res) => {
-
-    Post.find({ postedBy: { $in: req.user.following } })
-        .populate("postedBy", "_id name email")//to expand the object id so that we can get details
-        .populate("comments.postedBy", "_id name")
+        .sort('-createdAt')
         .then(posts => {
             res.json({ posts })//we can condense it down to post 
         })
@@ -31,7 +19,19 @@ router.get('/getsubpost', requireLogin, (req, res) => {
             console.log(err);
         })
 });
+router.get('/getsubpost', requireLogin, (req, res) => {
 
+    Post.find({ postedBy: { $in: req.user.following } })
+        .populate("postedBy", "_id name email")//to expand the object id so that we can get details
+        .populate("comments.postedBy", "_id name")
+        .sort('-createdAt')
+        .then(posts => {
+            res.json({ posts })//we can condense it down to post 
+        })
+        .catch(err => {
+            console.log(err);
+        })
+});
 router.post('/createpost', requireLogin, (req, res) => {
 
     const { title, body, pic } = req.body;
@@ -64,13 +64,14 @@ router.post('/createpost', requireLogin, (req, res) => {
 router.get('/myposts', requireLogin, (req, res) => {
     Post.find({ postedBy: req.user._id })
         .populate("postedBy", "_id name email")
+        .sort('-createdAt')
         .then(myPost => {
             res.json({ myPost })
         })
         .catch(err => {
             console.log(err)
         })
-})
+});
 //route for like a post
 router.put('/like', requireLogin, (req, res) => {
     Post.findByIdAndUpdate(req.body.postId,
@@ -154,7 +155,6 @@ router.delete('/deletePost/:postId', requireLogin, (req, res) => {
                     });
             }
         })
-})
+});
 
-
-module.exports = router
+module.exports = router;

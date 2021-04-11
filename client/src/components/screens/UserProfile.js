@@ -71,7 +71,7 @@ const Profile = () => {
                 localStorage.setItem("user", JSON.stringify(data))
 
                 setProfile((prevState) => {
-                    const newFollower = prevState.user.followers.filter(item => item != data._id)
+                    const newFollower = prevState.user.followers.filter(item => item !== data._id)
                     return {
                         ...prevState,
                         user: {
@@ -131,8 +131,8 @@ const Profile = () => {
                         </div>
                     </div>
                     :
-                    <div class="progress">
-                        <div class="indeterminate"></div>
+                    <div className="progress">
+                        <div className="indeterminate"></div>
                     </div>
 
             }

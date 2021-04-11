@@ -27,9 +27,55 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
     <title>Social-Media-Site</title>
   </head>
-  <body class="#e8eaf6 indigo lighten-5">
+  <body>
+    <!-- class="#e8eaf6 indigo lighten-5" -->
+    <script>
+      // Insert this script as-is in your index.html right after the <body> tag.
+      // This will help to prevent a flash if dark mode is the default.
+
+      (function() {
+        var classNameDark = 'dark-mode';
+        var classNameLight = 'light-mode';
+
+        function setClassOnDocumentBody(darkMode) {
+          document.body.classList.add(
+            darkMode ? classNameDark : classNameLight
+          );
+          document.body.classList.remove(
+            darkMode ? classNameLight : classNameDark
+          );
+        }
+
+        var preferDarkQuery = '(prefers-color-scheme: dark)';
+        var mql = window.matchMedia(preferDarkQuery);
+        var supportsColorSchemeQuery = mql.media === preferDarkQuery;
+        var localStorageTheme = null;
+        try {
+          localStorageTheme = localStorage.getItem('darkMode');
+        } catch (err) {}
+        var localStorageExists = localStorageTheme !== null;
+        if (localStorageExists) {
+          localStorageTheme = JSON.parse(localStorageTheme);
+        }
+
+        // Determine the source of truth
+        if (localStorageExists) {
+          // source of truth from localStorage
+          setClassOnDocumentBody(localStorageTheme);
+        } else if (supportsColorSchemeQuery) {
+          // source of truth from system
+          setClassOnDocumentBody(mql.matches);
+          localStorage.setItem('darkMode', mql.matches);
+        } else {
+          // source of truth from document.body
+          var isDarkMode = document.body.classList.contains(classNameDark);
+          localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
+        }
+      })();
+    </script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--

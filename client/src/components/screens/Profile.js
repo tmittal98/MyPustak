@@ -64,38 +64,39 @@ const Profile = () => {
         setImage(file);
     }
     return (
-        <div className="profile">
-            <div className="profile-top-container">
-                <div>
-                    <div>
-                        <img className="profile-image"
-                            src={state ? state.pic : "loading"}
-                        />
-                    </div>
-                    <div className="file-field input-field">
-                        <div className="btn #42a5f5 blue darken-1">
-                            <span>Upload profile pic</span>
-                            <input
-                                type="file"
-                                onChange={(e) => updatePic(e.target.files[0])}
+        <>
+            <div className="profile">
+                <div className="profile-top-container">
+                    <div className="left-top-container">
+                        <div>
+                            <img className="profile-image"
+                                src={state ? state.pic : "loading"}
                             />
                         </div>
-                        <div className="file-path-wrapper">
-                            <input className="file-path validate" type="text" />
+                        <div className="file-field input-field">
+                            <div className="btn #42a5f5 blue darken-1">
+                                <span>Upload profile pic</span>
+                                <input
+                                    type="file"
+                                    onChange={(e) => updatePic(e.target.files[0])}
+                                />
+                            </div>
+                            <div className="file-path-wrapper">
+                                <input className="file-path validate" type="text" />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <h4>{state ? state.name : "loading"}</h4>
-                    <h5>{state ? state.email : "loading"}</h5>
-                    <div className="profile-data">
-                        <h6>{mypics.length} posts</h6>
-                        <h6>{state ? state.followers.length : "0"} followers</h6>
-                        <h6>{state ? state.following.length : "0"} following</h6>
+                    <div className="right-bio-container">
+                        <h4>{state ? state.name : "loading"}</h4>
+                        <p>{state ? state.email : "loading"}</p>
+                        <div className="profile-data">
+                            <h6 className="bio-info"><strong>{mypics.length}</strong> posts</h6>
+                            <h6 className="bio-info"><strong>{state ? state.followers.length : "0"}</strong> followers</h6>
+                            <h6 className="bio-info"><strong>{state ? state.following.length : "0"} </strong>following</h6>
+                        </div>
                     </div>
                 </div>
             </div>
-
             <div className="gallery">
                 {
                     mypics.map(item => {
@@ -105,7 +106,7 @@ const Profile = () => {
                     })
                 }
             </div>
-        </div>
+        </>
     )
 }
 

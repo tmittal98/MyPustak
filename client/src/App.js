@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
 import React, { useEffect, createContext, useContext, useReducer } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
@@ -11,9 +9,12 @@ import Signup from './components/screens/Signup';
 import CreatePost from './components/screens/CreatePost';
 import UserProfile from './components/screens/UserProfile';
 import SubscribesUserProfile from './components/screens/SubscribesUserProfile';
+import Reset from './components/screens/Reset';
+import NewPassword from './components/screens/Newpassword';
 import { reducer, initialState } from './reducers/userReducer';
+import './dark-mode/styles.scss';
 
-export const UserContext = createContext();
+export const UserContext = createContext()
 
 const Routing = () => {
 
@@ -30,7 +31,8 @@ const Routing = () => {
       dispatch({ type: "USER", payload: user });
     }
     else {
-      history.push('/signin');
+      if (!history.location.pathname.startsWith('/reset'))
+        history.push('/signin');
     }
   }, []);
 
@@ -57,7 +59,13 @@ const Routing = () => {
       <Route path="/myfollowingposts">
         <SubscribesUserProfile />
       </Route>
-    </Switch>
+      <Route exact path="/reset-password">
+        <Reset />
+      </Route>
+      <Route exact path="/reset-password/:token">
+        <NewPassword />
+      </Route>
+    </Switch >
   )
 }
 function App() {

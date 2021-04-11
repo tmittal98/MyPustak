@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/style-prop-object */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import M from 'materialize-css'
 
-const SignIn = () => {
+const Signup = () => {
 
     //creating hooks
     const [name, setName] = useState("");
@@ -14,7 +15,16 @@ const SignIn = () => {
     const [url, setUrl] = useState(undefined);
     const [image, setImage] = useState("");
 
+    let inputRef = useRef(null)
+    let showPasswordRef = useRef(null)
+
     const history = useHistory();
+
+    useEffect(() => {
+        if (url) {
+            uploadFields()
+        }
+    }, [url])
 
     const uploadPic = () => {
         //upload a file we need to create FormData()
@@ -86,15 +96,24 @@ const SignIn = () => {
         }
     }
 
-    useEffect(() => {
-        if (url) {
-            uploadFields();
-        }
-    })
+    // useEffect(() => {
+    //     console.log("init modal called");
+    //     M.Modal.init(collapse.current);
+    //     // console.log("collapse ", collapse);
+    //     console.log(collapse.current);
+    // }, [])
 
+    const showPassword = () => {
+        // console.log(showPasswordRef.current);
+        showPasswordRef.current.attributes.type.value = "text";
+        // showPasswordRef.current.getElementsByClassName('password')[0].attributes.type.value = "text"
+    }
+    const fun = () => {
+        inputRef.current.classList.remove("hide");
+    }
     return (
-        <div className="card input-field">
-            <h2 className="form-heading">Instagram</h2>
+        <div className="card signin-card">
+            <img className="logo-signin" src="https://res.cloudinary.com/tushar-mittal1998/image/upload/v1617034645/Screenshot_270_cwwlbi.png" alt="socially" />
             <input
                 type="text"
                 placeholder="Name"
@@ -104,24 +123,34 @@ const SignIn = () => {
             <input
                 type="text"
                 className="placeicon"
-                placeholder="&#xf0e0; Email"
+                // &#xf0e0;
+                placeholder="Email"
                 val={email}
                 onChange={(e) => setEmail(e.target.value)}
             />
-            <input
-                type="password"
-                className="placeicon"
-                placeholder="&#xf023; Password"
-                val={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <div className="password-validation">
-                <p>Password must contain atleast</p>
+            <div className="password-field">
+                <input
+                    type="password"
+                    className="placeicon password"
+                    // &#xf023;
+                    placeholder="Password"
+                    val={password}
+                    onChange={(e) => {
+                        setPassword(e.target.value);
+                        fun();
+                    }}
+                    ref={showPasswordRef}
+                />
+                <i className="fas fa-eye"
+                    onClick={() => showPassword()}
+                ></i>
+            </div>
+            <div className="password-validation hide" ref={inputRef}>
+                <p>Password must contain atleast 8 letters including</p>
                 <hr />
                 <p>1 capital letter(A-Z)</p>
                 <p>1 small letter(a-z)</p>
                 <p>1 special character</p>
-                <p>8 letters</p>
             </div>
             <div className="file-field input-field">
                 <div className="btn #42a5f5 blue darken-1">
@@ -142,7 +171,8 @@ const SignIn = () => {
             </button>
             <h5><Link to="/signin">Already have an account ?</Link></h5>
         </div>
+
     )
 
 }
-export default SignIn
+export default Signup

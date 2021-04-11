@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useRef } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import M from 'materialize-css'
 import { UserContext } from '../../App'
@@ -10,7 +10,7 @@ const SignIn = () => {
     //creating hooks
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    let showPasswordRef = useRef(null)
     const history = useHistory();
 
     const PostData = () => {
@@ -37,7 +37,7 @@ const SignIn = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if (data.error) {
                     M.toast({ html: data.error, classes: "#e53935 red darken-1" });
                 }
@@ -50,28 +50,38 @@ const SignIn = () => {
                     M.toast({ html: "Signedin successfully", classes: "#43a047 green darken-1" });
                     history.push('/')
                 }
-            })
-            .catch(err => {
-                console.log(err);
             });
     }
+    const showPassword = () => {
+        // console.log(showPasswordRef.current.className);
+        showPasswordRef.current.attributes.type.value = "text";
+        // showPasswordRef.current.getElementsByClassName('password')[0].attributes.type.value = "text"
+    }
     return (
-        <div className="card input-field">
-            <h2 className="form-heading">Instagram</h2>
+        <div className="card signin-card">
+            <img className="logo-signin" src="https://res.cloudinary.com/tushar-mittal1998/image/upload/v1617034645/Screenshot_270_cwwlbi.png" alt="socially" />
             <input
                 type="text"
                 className="placeicon"
-                placeholder="&#xf0e0; Email"
+                // &#xf0e0;
+                placeholder="Email"
                 val={email}
                 onChange={(e) => setEmail(e.target.value)}
             />
-            <input
-                type="password"
-                className="placeicon"
-                placeholder="&#xf023; Password"
-                val={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className="password-field">
+                <input
+                    type="password"
+                    className="placeicon"
+                    // &#xf023;
+                    placeholder="Password"
+                    val={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    ref={showPasswordRef}
+                />
+                <i className="fas fa-eye"
+                    onClick={() => showPassword()}
+                ></i>
+            </div>
             <button className="btn waves-effect waves-light #42a5f5 blue darken-1"
                 onClick={() => PostData()}
             >
@@ -80,6 +90,9 @@ const SignIn = () => {
             <h5>
                 <Link to="/signup">Don't have an account ?</Link>
             </h5>
+            <p>
+                <Link to="/reset-password">Forgot password ?</Link>
+            </p>
         </div>
     )
 }
