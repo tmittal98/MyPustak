@@ -80,6 +80,7 @@ a{
   display: flex;
   justify-content: space-around;
   margin: 18px 0;
+  padding-bottom: 18px;
   border-bottom: 1px solid grey;
 }
 .profile-image{
@@ -223,4 +224,8 @@ button{
 .right-bio-container{
   position:relative;
   right:212px;
+}
+
+.shift-right{
+  margin-left: 206px;
 }

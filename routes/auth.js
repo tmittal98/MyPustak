@@ -3,17 +3,14 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 const User = mongoose.model("User")
+const crypto = require('crypto')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const { JWT_SECRET } = require('../config/keys')
 const requireLogin = require('../middleware/requireLogin')
 const nodemailer = require('nodemailer')
 const sendgridTransport = require('nodemailer-sendgrid-transport')
 const { SENDGRID_API_KEY, EMAIL } = require('../config/keys');
-const sgMail = require('@sendgrid/mail')
-const crypto = require('crypto')
-const { SENDGRID_API_KEY } = require('../config/keys')
-// sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+const { JWT_SECRET } = require('../config/keys')
 
 const transporter = nodemailer.createTransport(sendgridTransport({
     auth: {
@@ -158,8 +155,7 @@ router.post('/reset-password', (req, res) => {
                         from: "tusharmittal065@gmail.com",
                         subject: "password-reset",
                         html: `<p>You requested for password reset</p>
-<h4>click on this <a href="${EMAIL}/reset-password/${token}">link</a> to reset your password</h5>
-`
+                                <h4>Click on this <a href="${EMAIL}/reset-password/${token}">link</a> to reset your password</h5>`
                     })
 
                     res.status(200).json({ message: "Check your email" });
@@ -187,12 +183,8 @@ router.post('/new-password', (req, res) => {
 
                 user.save().then((savedUser) => {
                     res.json({ message: "password updated successfully" });
-                }).catch(err => {
-                    return res.status(422).json({ error: err });
                 })
-            }).catch(err => {
-                return res.status(422).json({ error: err });
-            });
+            })
         }).catch(err => {
             return res.status(422).json({ error: err });
         });

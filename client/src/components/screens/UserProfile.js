@@ -91,18 +91,20 @@ const Profile = () => {
                 userProfile ?
                     <div className="profile">
                         <div className="profile-top-container">
-                            <div>
-                                <img className="profile-image"
-                                    src={userProfile.user.pic}
-                                />
+                            <div className="left-top-container">
+                                <div>
+                                    <img className="profile-image"
+                                        src={userProfile.user.pic}
+                                    />
+                                </div>
                             </div>
-                            <div>
+                            <div className="right-bio-container shift-right">
                                 <h4>{userProfile.user.name}</h4>
                                 <h6>{userProfile.user.email}</h6>
                                 <div className="profile-data">
-                                    <h6>{userProfile.posts.length} posts</h6>
-                                    <h6>{userProfile.user.followers.length} followers</h6>
-                                    <h6>{userProfile.user.following.length} following</h6>
+                                    <h6 className="bio-info">{userProfile.user.followers.length} followers</h6>
+                                    <h6 className="bio-info">{userProfile.user.following.length} following</h6>
+                                    <h6 className="bio-info">{userProfile.posts.length} posts</h6>
                                 </div>
                                 {
                                     showFollow ?
