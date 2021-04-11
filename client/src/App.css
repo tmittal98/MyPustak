@@ -97,12 +97,12 @@ a{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin: 2% 14%;
+  margin: 2% 1%;
 }
 .item{
     height: 300px;
-    width: 47%;
-    margin: 10px;
+    width: 45%;
+    margin: 4px;
 }
 
 /* Profile Page Styling Ends */
