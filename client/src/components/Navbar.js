@@ -36,7 +36,7 @@ const NavBar = () => {
             }}
           >
             Logout
-            </button>
+          </button>
         </li>
       ]
     }
@@ -69,7 +69,7 @@ const NavBar = () => {
       <nav>
         <div className="nav-wrapper #b3e5fc light-blue lighten-4">
 
-          <Link to={state ? "/" : "/signin"} className="brand-logo left"><img className="logo-navbar" src="https://res.cloudinary.com/tushar-mittal1998/image/upload/v1617034645/Screenshot_270_cwwlbi.png" alt="" /></Link>
+          <Link to={state ? "/" : "/signin"} className="brand-logo left"><img className="logo-navbar" src="https://res.cloudinary.com/tushar-mittal1998/image/upload/v1628750424/logo_qcs1jn.svg" alt="" /></Link>
 
           <ul id="nav-mobile" className="right">
             {renderList()}
@@ -100,6 +100,7 @@ const NavBar = () => {
             <button className="modal-close waves-effect waves-green btn-flat" onClick={() => setSearch('')}>close</button>
           </div>
         </div>
+
       </nav>
     </div>
 

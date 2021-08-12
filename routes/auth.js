@@ -68,7 +68,7 @@ router.post('/signup', (req, res) => {
                             transporter.sendMail({
                                 to: user.email,
                                 from: "tusharmittal065@gmail.com",
-                                subject: "Welcome to Socially",
+                                subject: "Welcome to MyPustak",
                                 html: require('../emailTemplates/welcomeTemplate')({
                                     name: user.name
                                 })
