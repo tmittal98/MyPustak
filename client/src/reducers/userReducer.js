@@ -3,6 +3,7 @@
 //initially we dont't have any data related to user
 export const initialState = null;
 
+// reducer function that takes the state and an action as arguments designed for accessing and managing the global state of the application
 export const reducer = (state, action) => {
 
     if (action.type === "USER") {

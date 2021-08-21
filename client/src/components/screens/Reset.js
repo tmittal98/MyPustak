@@ -8,7 +8,7 @@ const Reset = () => {
     const [email, setEmail] = useState("");
     const history = useHistory();
 
-    
+
     const ResetPassword = () => {
 
         //email validation using regex
@@ -38,7 +38,7 @@ const Reset = () => {
     }
     return (
         <div className="card signin-card">
-            <img className="logo-signin" src="https://res.cloudinary.com/tushar-mittal1998/image/upload/v1617034645/Screenshot_270_cwwlbi.png" alt="socially" />
+            <img className="logo-signin" src="https://res.cloudinary.com/tushar-mittal1998/image/upload/v1628750424/logo_qcs1jn.svg" alt="socially" />
             <input
                 type="text"
                 className="placeicon"

@@ -71,6 +71,8 @@ const Routing = () => {
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
+    //dispatch ki help se components global state change kar sakte hain
+
     <UserContext.Provider value={{ state, dispatch }}>
       <BrowserRouter>
         <NavBar />

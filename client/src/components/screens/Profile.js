@@ -10,6 +10,7 @@ const Profile = () => {
     const { state, dispatch } = useContext(UserContext);
     const [image, setImage] = useState("");
 
+    //FIRST TIME THIS IS RENDERING 
     useEffect(() => {
         fetch('/myposts', {
             headers: {
@@ -22,6 +23,8 @@ const Profile = () => {
             })
     }, []);
 
+
+    //WHENEVER THE PROFILE IMAGE IS CHANGED THIS USEEFFECT GETS RENDERED
     useEffect(() => {
         if (image) {
             //upload a file we need to create FormData()
@@ -48,7 +51,7 @@ const Profile = () => {
                             pic: data.url
                         })
                     }).then(res => res.json()).then(result => {
-                        console.log("ye naya bharat hain", result);
+                        //console.log(result);
                         localStorage.setItem("user", JSON.stringify({ ...state, pic: result.pic }))
                         dispatch({ type: "UPDATEPIC", payload: result.pic });
                         // window.location.reload();

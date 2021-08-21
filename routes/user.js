@@ -83,7 +83,7 @@ router.put('/updatepic', requireLogin, (req, res) => {
                 return res.status(422).json({ error: "Update pic failed" });
             }
             res.json(result);
-        })
+        });
 });
 
 router.post('/search-users', (req, res) => {

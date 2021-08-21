@@ -149,6 +149,9 @@ const Home = () => {
                             <div className="card-content">
                                 <div className="like-dislike">
                                     {
+                                        /*
+                                        JavaScript Array includes() The includes() method returns true if an array contains a specified element, otherwise false . includes() is case sensitive.
+                                        */
                                         item.likes.includes(state._id) ?
                                             <i className="material-icons" onClick={() => unlikePost(item._id)}>thumb_down</i>
                                             :
