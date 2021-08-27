@@ -52,7 +52,7 @@ const NewPassword = () => {
     }
     return (
         <div className="card input-field signin-card">
-            <img className="logo-signin" src="https://res.cloudinary.com/tushar-mittal1998/image/upload/v1617034645/Screenshot_270_cwwlbi.png" alt="socially" />
+            <img className="logo-signin" src="https://res.cloudinary.com/tushar-mittal1998/image/upload/v1628750424/logo_qcs1jn.svg" alt="socially" />
             <input
                 type="password"
                 className="placeicon"
