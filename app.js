@@ -1,4 +1,3 @@
-//Notes
 //1. Our express server does not parse the request automatically to json
 const express = require('express');
 const app = express();
