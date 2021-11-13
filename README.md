@@ -1,2 +1,4 @@
 # MyPustak
-Social networking platform for people to share their photos.
+MyPustak is a website which makes book donation easier. 
+
+
